@@ -17,6 +17,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLStreamHandler;
+import java.net.URLStreamHandlerFactory;
 import java.nio.charset.Charset;
 
 public class HttpUtils {
@@ -44,14 +46,14 @@ public class HttpUtils {
 
     public static final String HTTP_PROTOCAL_PREFIX = "http://";
 
-//    static {
-//        URL.setURLStreamHandlerFactory(new URLStreamHandlerFactory() {
-//            @Override
-//            public URLStreamHandler createURLStreamHandler(String protocol) {
-//                return new sun.net.www.protocol.http.Handler();
-//            }
-//        });
-//    }
+    static {
+        URL.setURLStreamHandlerFactory(new URLStreamHandlerFactory() {
+            @Override
+            public URLStreamHandler createURLStreamHandler(String protocol) {
+                return new sun.net.www.protocol.http.Handler();
+            }
+        });
+    }
 
     public static String executeGet(String charset, String requstUrl, int timeout) {
         if (timeout <= 0) {

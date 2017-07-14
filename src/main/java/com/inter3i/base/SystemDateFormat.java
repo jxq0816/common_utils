@@ -36,8 +36,8 @@ public class SystemDateFormat {
      * @return 1 yyyy MM dd  HH mm ss SSS
      */
     public static int[] formatDate2IntArray(Date date) {
-        int year, mon, day, hour, min, sec, milli, wednesday;
-        int[] result = new int[8];
+        int year, mon, day, hour, min, sec, milli, wednesday, dyaOfWeek;
+        int[] result = new int[9];
         try {
             lock.lock();
             calendar.setTime(date);
@@ -50,6 +50,7 @@ public class SystemDateFormat {
             sec = calendar.get(Calendar.SECOND);
             milli = calendar.get(Calendar.MILLISECOND);
             wednesday = calendar.get(Calendar.WEDNESDAY);
+            dyaOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
 
             result[0] = year;
             result[1] = mon;
@@ -59,6 +60,7 @@ public class SystemDateFormat {
             result[5] = sec;
             result[6] = milli;
             result[7] = wednesday;
+            result[8] = dyaOfWeek;
         } finally {
             lock.unlock();
         }
@@ -179,13 +181,13 @@ public class SystemDateFormat {
                 simpleDateFormat = (SimpleDateFormat) Toolkit.getDateFormat(tempStr);
             } else {
                 //处理得到的是毫秒，前台处理用的是秒，所以除了1000
-                return formatDateTimeStrWithRegex(dateStr) / 1000;
+                return formatDateTimeStrWithRegex(dateStr);
             }
             if (simpleDateFormat == null) {
                 throw new RuntimeException("不支持的日期格式:[" + dateStr + "].");
             }
             //处理得到的是毫秒，前台处理用的是秒，所以除了1000
-            return simpleDateFormat.parse(dateStr).getTime() / 1000;
+            return simpleDateFormat.parse(dateStr).getTime();
         } catch (ParseException e) {
             throw new RuntimeException("parseDate string excption:[" + dateStr + "].");
         }
