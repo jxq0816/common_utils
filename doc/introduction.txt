@@ -1,0 +1,30 @@
+1. DataSourceConfig:mongo数据源配置类
+initConfig 方法 可以读取配置文件，获得mongo数据源的配置信息，如serverIp，serverPort，dbName
+
+2.MongoDBDatasources:mongo数据源获取
+（1）getMongoCollection方法：根据数据源参数配置和（表）集合名称，建立数据库连接
+参数列表：
+①DataSourceConfig：数据源配置
+②tableName：（表）集合名称
+返回值类型：MongoCollection
+（2）createMongoCollection方法：获得数据库连接池
+参数列表
+①DataSourceConfig：数据源配置
+返回值类型：MongoClient
+（3）destory方法：关闭mongo数据库的连接
+
+3.MongoRepository：mongo仓库操作函数
+（1）findById方法:查询mongo collection的单个元素
+参数列表：id
+返回值:Map
+（2）findAll方法：查询mongo collection的所有元素
+返回值:Iterable<Map>
+（3）insert方法：保存集合所有元素
+参数列表：Collection<Map> entitys
+（4）save：保存单个元素
+（5）removeById方法：删除单个元素
+参数列表：id
+（6）updateById方法：更新元素
+参数列表：
+Document document
+ObjectId id
