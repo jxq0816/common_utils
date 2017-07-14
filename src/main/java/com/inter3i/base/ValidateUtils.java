@@ -68,4 +68,15 @@ public class ValidateUtils {
             return true;
         }
     }
+
+    public static boolean isSimpleDataType(Object value) {
+        if (null == value) {
+            return true;
+        }
+        if (value instanceof String || value instanceof Integer || value instanceof Character || value instanceof Boolean || value instanceof Double ||
+                value instanceof Float || value instanceof Byte || value instanceof Short || value instanceof Long) {
+            return true;
+        }
+        return false;
+    }
 }
