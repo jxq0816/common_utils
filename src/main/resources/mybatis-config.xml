@@ -7,15 +7,15 @@
             <transactionManager type="JDBC"/>
             <dataSource type="POOLED">
                 <property name="driver" value="com.mysql.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://127.0.0.1:3306/solm" />
+                <property name="url" value="jdbc:mysql://192.168.0.12:3306/mysql" />
                 <property name="username" value="root"/>
-                <property name="password" value="root"/>
+                <property name="password" value="inter3i.com"/>
             </dataSource>
         </environment>
     </environments>
 
     <!-- mybatis的mapper文件，每个xml配置文件对应一个接口 -->
     <mappers>
-        <mapper resource="mappings/UserDao.xml"/>
+        <mapper resource="mappings/testDao.xml"/>
     </mappers>
 </configuration>

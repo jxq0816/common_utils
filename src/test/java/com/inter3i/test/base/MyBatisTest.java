@@ -9,6 +9,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -28,8 +29,8 @@ public class MyBatisTest {
         SqlSession session = ssf.openSession();
         try {
             Map param=new HashMap();
-            param.put("name","admin");
-            Map rs = session.selectOne("query",param);
+            param.put("name","root");
+            List<Map> rs = session.selectList("query",param);
             System.out.println(rs);
         } catch (Exception e) {
             e.printStackTrace();

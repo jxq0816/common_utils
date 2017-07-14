@@ -2,12 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.inter3i.base.mybatis.dao.UserDao">
 
-    <!-- 根据登录名查询用户 -->
     <select id="query" resultType="java.util.Map" parameterType="java.util.Map">
         SELECT
-        id
-        FROM sys_user a
-        WHERE a.login_name = #{name}
+        *
+        FROM user
+        WHERE user = #{name}
     </select>
 
 </mapper>
