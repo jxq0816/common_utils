@@ -79,7 +79,7 @@ public class ExpressionTest {
         // x > 18
         ExpressionEntity moreThan18Ofsanmu = new ExpressionEntity();
         moreThan18Ofsanmu.setType(ExpressionEntity.OPERATOR_TYPE_BINARY);
-        moreThan18Ofsanmu.setOperator(">");
+        moreThan18Ofsanmu.setOperator("$gt");
 
         List<ExpressionEntity> childsOfLogic = new ArrayList<>(2);//满18岁的 子逻辑列表
         childsOfLogic.add(danmuExpress);//单子逻辑列表添加 单目表达式
@@ -151,10 +151,10 @@ public class ExpressionTest {
         JSONObject content = new JSONObject();
 
         JSONObject student = new JSONObject();
-        content.put("student", student);
         student.put("name", "zhangsan");
         student.put("sex", "male");
         student.put("age", 1);
+        content.put("student", student);
         Object result = expression.evel(content);
         System.out.println("result is :[" + result + "].");
     }
