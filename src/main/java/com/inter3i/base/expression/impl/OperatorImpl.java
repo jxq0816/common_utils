@@ -45,7 +45,7 @@ public class OperatorImpl {
 
     public static IBinaryOperator.MOD MOD = (Object left, Object right) -> {
         double leftValue = DataType.getDoubleValue(left);
-        double rightValue = DataType.getDoubleValue(left);
+        double rightValue = DataType.getDoubleValue(right);
         return leftValue * rightValue;
     };
 
@@ -98,7 +98,7 @@ public class OperatorImpl {
     };
     public static ILogicOperator.LTE LTE = (Object left, Object right) -> {
         double leftValue = DataType.getDoubleValue(left);
-        double rightValue = DataType.getDoubleValue(left);
+        double rightValue = DataType.getDoubleValue(right);
         return leftValue <= rightValue;
     };
 
