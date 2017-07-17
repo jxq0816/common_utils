@@ -31,14 +31,6 @@ public class ExpressionTest {
         Long long2 = Long.valueOf(8);
         System.out.println(long1 == long2 ? "等于" : "不等于");
 
-        JSONObject content = new JSONObject();
-
-        JSONObject student = new JSONObject();
-        content.put("student", student);
-        student.put("name", "zhangsan");
-        student.put("sex", "male");
-        student.put("age", 1);
-
         // student.age ++ > 18 ? "chengnian":"weichengnian"
 
         // ==
@@ -47,31 +39,31 @@ public class ExpressionTest {
         //and
         //sex == male
 
-        ExpressionEntity expressiontEntity = new ExpressionEntity();
-        expressiontEntity.setType(ExpressionEntity.OPERATOR_TYPE_LOGIC);
-        expressiontEntity.setOperator("and");
-        List<ExpressionEntity> childExpression = new ArrayList<>(2);
-        expressiontEntity.setChildExpressions(childExpression);
+        ExpressionEntity expressionEntity = new ExpressionEntity();//总表达式
+        expressionEntity.setType(ExpressionEntity.OPERATOR_TYPE_LOGIC);
+        expressionEntity.setOperator("and");
+        List<ExpressionEntity> childExpression = new ArrayList<>(2);//两个子表达式
+        expressionEntity.setChildExpressions(childExpression);
 
-        ExpressionEntity firstExpressiontEntity = new ExpressionEntity();
-        childExpression.add(firstExpressiontEntity);
+        ExpressionEntity firstExpressionEntity = new ExpressionEntity();//第一个子表达式实体
+        childExpression.add(firstExpressionEntity);
 
-        firstExpressiontEntity.setOperator("==");
-        firstExpressiontEntity.setType(ExpressionEntity.OPERATOR_TYPE_BINARY);
-        List<ExpressionEntity> childsOfFirst = new ArrayList<>(2);
-        firstExpressiontEntity.setChildExpressions(childsOfFirst);
+        firstExpressionEntity.setOperator("==");
+        firstExpressionEntity.setType(ExpressionEntity.OPERATOR_TYPE_BINARY);
+        List<ExpressionEntity> childsOfFirst = new ArrayList<>(2);//第一个子表达
+        firstExpressionEntity.setChildExpressions(childsOfFirst);
 
-        ExpressionEntity sanMu = new ExpressionEntity();
-        childsOfFirst.add(sanMu);
+        ExpressionEntity sanMu = new ExpressionEntity();//三目
+        childsOfFirst.add(sanMu);//三目加入第一个子表达式
         sanMu.setType(ExpressionEntity.OPERATOR_TYPE_TERNARY);
         sanMu.setOperator("?");
 
-        List<ExpressionEntity> childsOfSanmu = new ArrayList<>(3);
+        List<ExpressionEntity> childsOfSanmu = new ArrayList<>(3);//三目子表达式
         sanMu.setChildExpressions(childsOfSanmu);
 
 
         //student.age ++
-        ExpressionEntity danmuExpress = new ExpressionEntity();
+        ExpressionEntity danmuExpress = new ExpressionEntity();//单目表达式
         danmuExpress.setOperator("++");
         danmuExpress.setType(ExpressionEntity.OPERATOR_TYPE_UNARY);
         ExpressionEntity.ValueTermEntity valueTermEntity = new ExpressionEntity.ValueTermEntity();
@@ -80,7 +72,7 @@ public class ExpressionTest {
         valueTermEntity.setValue("student.age");
         valueTermEntity.setType(ExpressionEntity.OPERATOR_TYPE_VALUE);
 
-        List<ExpressionEntity> childsOfDanmu = new ArrayList<>(1);
+        List<ExpressionEntity> childsOfDanmu = new ArrayList<>(1);//单目子表达式
         childsOfDanmu.add(valueTermEntity);
         danmuExpress.setChildExpressions(childsOfDanmu);
 
@@ -88,10 +80,11 @@ public class ExpressionTest {
         ExpressionEntity moreThan18Ofsanmu = new ExpressionEntity();
         moreThan18Ofsanmu.setType(ExpressionEntity.OPERATOR_TYPE_BINARY);
         moreThan18Ofsanmu.setOperator(">");
-        List<ExpressionEntity> childsOfLogic = new ArrayList<>(2);
-        childsOfLogic.add(danmuExpress);
+
+        List<ExpressionEntity> childsOfLogic = new ArrayList<>(2);//满18岁的 子逻辑列表
+        childsOfLogic.add(danmuExpress);//单子逻辑列表添加 单目表达式
         moreThan18Ofsanmu.setChildExpressions(childsOfLogic);
-        childsOfSanmu.add(moreThan18Ofsanmu);
+        childsOfSanmu.add(moreThan18Ofsanmu);//三目表达式添加满18
 
         // 18 constants
         ExpressionEntity.ValueTermEntity isAdult = new ExpressionEntity.ValueTermEntity();
@@ -108,7 +101,7 @@ public class ExpressionTest {
         falseValueOfDanMu.setValueType("constants");
         falseValueOfDanMu.setValue("weichengnian");
         falseValueOfDanMu.setType(ExpressionEntity.OPERATOR_TYPE_VALUE);
-        childsOfSanmu.add(falseValueOfDanMu);
+        childsOfSanmu.add(falseValueOfDanMu);//三目表达式添加false value of danmu
 
         //true value of danmu
         ExpressionEntity.ValueTermEntity trueValueOfDanMu = new ExpressionEntity.ValueTermEntity();
@@ -116,7 +109,7 @@ public class ExpressionTest {
         trueValueOfDanMu.setValueType("constants");
         trueValueOfDanMu.setValue("chengnian");
         trueValueOfDanMu.setType(ExpressionEntity.OPERATOR_TYPE_VALUE);
-        childsOfSanmu.add(trueValueOfDanMu);
+        childsOfSanmu.add(trueValueOfDanMu);//三目表达式添加true value of danmu
 
         // == "chengnian"
         ExpressionEntity.ValueTermEntity chengnianBiaoZhun = new ExpressionEntity.ValueTermEntity();
@@ -124,15 +117,17 @@ public class ExpressionTest {
         chengnianBiaoZhun.setValueType("constants");
         chengnianBiaoZhun.setValue("chengnian");
         chengnianBiaoZhun.setType(ExpressionEntity.OPERATOR_TYPE_VALUE);
-        childsOfFirst.add(chengnianBiaoZhun);
+        childsOfFirst.add(chengnianBiaoZhun);//成年加入第一个子表达式
 
 
         // **************** sex == male ***************/
         //sex == male
-        ExpressionEntity second = new ExpressionEntity();
+        ExpressionEntity second = new ExpressionEntity();//第二个子表达式实体
         second.setOperator("==");
         second.setType(ExpressionEntity.OPERATOR_TYPE_BINARY);
-        List<ExpressionEntity> childsOfSecond = new ArrayList<>(2);
+
+
+        List<ExpressionEntity> childsOfSecond = new ArrayList<>(2);//第二个子表达式
         second.setChildExpressions(childsOfSecond);
         childExpression.add(second);
 
@@ -142,17 +137,24 @@ public class ExpressionTest {
         studentSex.setValueType("pathExpress");
         studentSex.setValue("student.sex");
         studentSex.setType(ExpressionEntity.OPERATOR_TYPE_VALUE);
-        childsOfSecond.add(studentSex);
+        childsOfSecond.add(studentSex);//第二个子表达式添加学生性别
 
         ExpressionEntity.ValueTermEntity constantsMale = new ExpressionEntity.ValueTermEntity();
         constantsMale.setDataType("String");
         constantsMale.setValueType("constants");
         constantsMale.setValue("male");
         constantsMale.setType(ExpressionEntity.OPERATOR_TYPE_VALUE);
-        childsOfSecond.add(constantsMale);
+        childsOfSecond.add(constantsMale);//第二个子表达式添加？？？
         // **************** sex == male ***************/
 
-        ExpressionEngine.Expression expression = ExpressionEntity.conver2Expression(expressiontEntity);
+        ExpressionEngine.Expression expression = ExpressionEntity.conver2Expression(expressionEntity);//总表达式
+        JSONObject content = new JSONObject();
+
+        JSONObject student = new JSONObject();
+        content.put("student", student);
+        student.put("name", "zhangsan");
+        student.put("sex", "male");
+        student.put("age", 1);
         Object result = expression.evel(content);
         System.out.println("result is :[" + result + "].");
     }
