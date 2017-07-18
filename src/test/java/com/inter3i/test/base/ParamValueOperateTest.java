@@ -21,6 +21,7 @@ public class ParamValueOperateTest {
         JSONObject testData = new JSONObject();
         JSONObject school = new JSONObject();
         testData.put("school", school);
+        school.put("name","cueb");
 
         JSONObject employee = new JSONObject();
         testData.put("employee", employee);
@@ -30,27 +31,18 @@ public class ParamValueOperateTest {
         employee.put("sex", "女");
 
 
-        String express = "employee.name";
-//        Object valuesss = ParamHelper.ParamGetterHelper.getValueBy(express, testData);
-//        System.out.println(valuesss);
+        String express = "school.name";
+        Object value = ParamHelper.ParamGetterHelper.getValueBy(express, testData);//根据路径表达，获得
+        System.out.println(value);
 
 
-        express = "school.classess[1,3-9,10].name";
-        ParamHelper.ParamSetterHelper.setValueBy(express, testData, "王超超");
+        //express = "school.class[1,3-9,10].name";
+        express = "employee.name";
+        ParamHelper.ParamSetterHelper.setValueBy(express, testData, "王超超");//设置参数值
 
-
-        //Object value = ParamHelper.ParamGetterHelper.getValueBy(express, testData);
-        System.out.println("ok, getValue by express:[" + express + "] is:[" + testData + "].");
+        System.out.println("ok, getValue by express:[" + express + "] from:[" + testData + "].");
 //        String express = "school.classess[1,3-9,10].name";
         Object values = ParamHelper.ParamGetterHelper.getValueBy(express, testData);
         System.out.println(values);
-
-//        List aa = new ArrayList();
-//        aa.add(2, "s");
-//        System.out.println(aa.get(2));
-
-        /*JSONArray aa = new JSONArray();
-        Object value = aa.get(2);
-        System.out.println(aa.get(2));*/
     }
 }

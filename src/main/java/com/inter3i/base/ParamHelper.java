@@ -66,7 +66,10 @@ public class ParamHelper {
          */
         private IndxIterable valueIdx;
 
-
+        /**
+         *数组处理，去除【】，设置URL请求参数
+         * @param propertyNameFullStr
+         */
         PathExprs(final String propertyNameFullStr) {
             if (propertyNameFullStr.contains("[") && propertyNameFullStr.contains("]")) {
                 this.propertyName = propertyNameFullStr.substring(0, propertyNameFullStr.indexOf("["));
@@ -77,6 +80,11 @@ public class ParamHelper {
             }
         }
 
+        /**
+         * 将pathStr以“.”为分隔符，拆分为数组
+         * @param pathStr
+         * @return
+         */
         public static PathExprs[] createPathExprs(final String pathStr) {
             PathExprs[] result = null;
             if (pathStr.contains(".")) {
